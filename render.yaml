@@ -1,12 +1,7 @@
 services:
   - type: web
     name: runway-routes
-    runtime: node
-    plan: free
-    buildCommand: npm ci && npm run build
-    startCommand: npm start
-    healthCheckPath: /
+    runtime: static
+    buildCommand: npm ci && npm run build:static
+    staticPublishPath: ./static-site
     autoDeployTrigger: commit
-    envVars:
-      - key: NODE_VERSION
-        value: 24.18.0
