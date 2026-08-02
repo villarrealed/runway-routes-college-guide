@@ -313,6 +313,24 @@ const schools: School[] = [
   }
 ].sort((a,b)=>a.name.localeCompare(b.name));
 
+const timeInSeconds = (mark: string) => {
+  const match = mark.match(/(\d+):(\d+)/);
+  return match ? Number(match[1]) * 60 + Number(match[2]) : 9999;
+};
+
+const aviationRanking = [...schools].sort((a,b) =>
+  b.scores.aviation - a.scores.aviation ||
+  b.scores.campus - a.scores.campus ||
+  b.scores.value - a.scores.value ||
+  a.name.localeCompare(b.name)
+);
+
+const athleticsRanking = [...schools].sort((a,b) =>
+  b.scores.athletics - a.scores.athletics ||
+  timeInSeconds(a.times.scholarship) - timeInSeconds(b.times.scholarship) ||
+  a.name.localeCompare(b.name)
+);
+
 export default function Home() {
   return <main>
     <header className="topbar" id="top"><div className="topbar-inner"><a className="brand" href="#top"><span className="brand-mark">R</span><span>Runway Routes</span></a><span className="top-label">College guide</span></div></header>
@@ -322,6 +340,11 @@ export default function Home() {
     <section className="definitions"><div><span>Quick definitions</span><h2>Know the basics before you start.</h2></div><div className="definition-grid"><article><b>R-ATP</b><p>A Restricted Airline Transport Pilot certificate. An approved college program may let a graduate qualify for an airline first-officer job with fewer than the usual 1,500 flight hours—often 1,000 or 1,250.</p><p><strong>Why it matters:</strong> Requiring 250 or 500 fewer hours can shorten the time between college and airline eligibility and may reduce the cost of building those hours. It is not automatic: the student must complete the correct FAA-approved degree, courses and flight training.</p></article><article><b>Part 141</b><p>An FAA-approved flight-school structure with an organized curriculum and regular progress checks. It can make training more efficient, but each student still has to meet FAA standards.</p><p><strong>Why it matters:</strong> The structured program can help a student stay on schedule and may allow some certificates with fewer minimum flight hours than ordinary Part 61 training. For many college pilots, qualifying Part 141 coursework is also part of earning the R-ATP hour reduction.</p></article><article><b>Walk-on</b><p>A student who joins a college team without an athletic scholarship. A coach must still approve the roster spot, and space can change every year.</p></article><article><b>Recruit</b><p>An athlete a coach actively wants on the team. Recruiting interest does not always mean athletic scholarship money.</p></article><article><b>Main campus vs. satellite</b><p>A main-campus airport is on or beside the primary college. A nearby airport requires a short trip but is still part of the same program. A satellite aviation campus can require a longer daily commute, so transportation and practice timing matter.</p></article></div></section>
 
     <section className="recruit-note"><span>About the running times</span><p>Each profile shows estimated <b>1600m / 3200m</b> track times. These are planning ranges, not official standards or promises. Cross-country courses are different from one another, team needs change, and the coach makes the final decision. Always email the coach with verified race results.</p></section>
+
+    <section className="rankings" id="rankings"><div className="ranking-heading"><p className="kicker">Two different rankings</p><h2>Strong flight school does not always mean strongest running team.</h2><p>These lists rank aviation and men's cross country independently. A high athletics ranking usually means a faster, harder-to-make roster—not necessarily a better personal recruiting fit.</p></div><div className="ai-caveat"><b>AI-generated planning rankings</b><p>These are independent, unofficial rankings created by AI from the researched information in this guide. They are not published by the universities, FAA, NCAA, NAIA, coaches or an accrediting organization. Programs can change, and reasonable people may rank them differently.</p></div><div className="ranking-grid">
+      <article><header><span>✈</span><div><h3>Flight-program ranking</h3><p>Considers program depth, R-ATP pathway, fleet and simulators, Part 141 integration, airline connections, facilities, campus logistics and overall value.</p></div></header><ol>{aviationRanking.map((s,index)=><li key={s.id}><b>{index+1}</b><span>{s.name}<small>Aviation score: {s.scores.aviation}/10</small></span></li>)}</ol></article>
+      <article><header><span>🏃</span><div><h3>Men's XC ranking</h3><p>Considers competitive level, conference strength, program resources, roster difficulty and the estimated recruiting marks used in this guide.</p></div></header><ol>{athleticsRanking.map((s,index)=><li key={s.id}><b>{index+1}</b><span>{s.name}<small>Athletics score: {s.scores.athletics}/10</small></span></li>)}</ol></article>
+    </div></section>
 
     <section className="school-list" id="schools"><div className="list-heading"><p className="kicker">Alphabetical school list</p><h2>Explore all {schools.length} programs.</h2><p>Every card includes the same topics so the schools are easier to understand and compare.</p></div>
       {schools.map((s,index)=><article className="school-post" key={s.id}>
