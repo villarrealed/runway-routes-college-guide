@@ -1,7 +1,3 @@
-"use client";
-
-import { useMemo, useState } from "react";
-
 type School = {
   id: string; name: string; short: string; location: string; state: string;
   division: string; conference: string; setting: string; climate: string;
@@ -208,86 +204,31 @@ const schools: School[] = [
   }
 ];
 
-const weightsDefault = { aviation: 30, athletics: 25, value: 20, climate: 10, campus: 15 };
-type WeightKey = keyof typeof weightsDefault;
-
 export default function Home() {
-  const [query, setQuery] = useState("");
-  const [division, setDivision] = useState("All");
-  const [ratpOnly, setRatpOnly] = useState(false);
-  const [selected, setSelected] = useState<string[]>([]);
-  const [weights, setWeights] = useState(weightsDefault);
-  const [sort, setSort] = useState("alpha");
-
-  const scored = useMemo(() => schools.map(s => {
-    const total = Object.values(weights).reduce((a,b) => a+b, 0) || 1;
-    const score = (Object.entries(weights) as [WeightKey, number][]).reduce((sum,[k,w]) => sum + s.scores[k] * w, 0) / total;
-    return { ...s, score };
-  }), [weights]);
-  const filtered = useMemo(() => scored.filter(s =>
-    (!query || `${s.name} ${s.location} ${s.aviation}`.toLowerCase().includes(query.toLowerCase())) &&
-    (division === "All" || s.division.includes(division)) && (!ratpOnly || s.ratp.startsWith("Yes"))
-  ).sort((a,b) => sort === "score" ? b.score-a.score : a.name.localeCompare(b.name)), [scored, query, division, ratpOnly, sort]);
-  const compare = scored.filter(s => selected.includes(s.id));
-  const toggle = (id:string) => setSelected(curr => curr.includes(id) ? curr.filter(x=>x!==id) : curr.length < 3 ? [...curr,id] : curr);
-
   return <main>
-    <header className="hero">
-      <nav><a className="brand" href="#top"><span>RUNWAY</span> / ROUTES</a><a href="#directory">Directory</a><a href="#score">Score</a><a href="#method">Method</a></nav>
-      <div className="hero-inner" id="top">
-        <p className="eyebrow">2026 field guide · men's cross country + professional flight</p>
-        <h1>Choose the school.<br/><em>Keep both dreams.</em></h1>
-        <p className="lede">A decision tool for student-athletes comparing collegiate flight training, running opportunity, cost, climate and campus fit.</p>
-        <div className="hero-actions"><a className="button primary" href="#directory">Explore 12 schools</a><a className="button ghost" href="#score">Build my ranking</a></div>
-        <div className="hero-stats"><div><strong>12</strong><span>verified programs</span></div><div><strong>3</strong><span>athletic levels</span></div><div><strong>1,000</strong><span>hour R-ATP paths*</span></div></div>
-      </div>
-    </header>
+    <header className="topbar" id="top"><div className="topbar-inner"><a className="brand" href="#top"><span className="brand-mark">R</span><span>Runway Routes</span></a><span className="top-label">College guide</span></div></header>
 
-    <section className="notice"><strong>Recruiting reality check</strong><p>Running marks below are planning estimates, not offers or official team standards. Cross-country courses vary, roster needs change annually, and coaches control every spot. Times are shown as <b>1600m / 3200m</b>; contact each coach with verified results.</p></section>
+    <section className="intro"><div className="intro-copy"><p className="kicker">For runners who want to fly</p><h1>College cross country.<br/>Professional flight training.<br/><span>One school.</span></h1><p>This guide introduces 12 colleges where a male student can study to become a professional pilot and compete in cross country. Read through the schools, talk with your family, and contact the flight program and coach before making a decision.</p><a className="primary-link" href="#schools">See the schools ↓</a></div><aside className="intro-card"><div className="plane-icon">✈</div><strong>What to compare</strong><ul><li>Can I realistically make the running team?</li><li>Can my family afford tuition and flight fees?</li><li>Will I enjoy the campus and weather?</li><li>Can flight lessons fit around practice and meets?</li></ul></aside></section>
 
-    <section className="section score-section" id="score">
-      <div className="section-head"><div><p className="eyebrow dark">Your priorities</p><h2>Make the ranking yours.</h2></div><p>Move the weights. Every school score updates instantly; a 10 means strongest fit within this directory, not a universal grade.</p></div>
-      <div className="score-grid">
-        <div className="sliders">
-          {(Object.keys(weights) as WeightKey[]).map(k => <label key={k}><span>{k}<b>{weights[k]}%</b></span><input aria-label={`${k} weight`} type="range" min="0" max="50" value={weights[k]} onChange={e=>setWeights({...weights,[k]:+e.target.value})}/></label>)}
-          <button className="text-button" onClick={()=>setWeights(weightsDefault)}>Reset balanced weights</button>
-        </div>
-        <ol className="ranking">{[...scored].sort((a,b)=>b.score-a.score).slice(0,5).map((s,i)=><li key={s.id}><span className="rank">0{i+1}</span><div><strong>{s.name}</strong><small>{s.division} · {s.location}</small></div><b>{s.score.toFixed(1)}</b></li>)}</ol>
-      </div>
+    <section className="definitions"><div><span>Quick definitions</span><h2>Know the basics before you start.</h2></div><div className="definition-grid"><article><b>R-ATP</b><p>A Restricted Airline Transport Pilot certificate. An approved college program may let a graduate qualify for an airline first-officer job with fewer than the usual 1,500 flight hours—often 1,000 or 1,250.</p></article><article><b>Part 141</b><p>An FAA-approved flight-school structure with an organized curriculum and regular progress checks. It can make training more efficient, but each student still has to meet FAA standards.</p></article><article><b>Walk-on</b><p>A student who joins a college team without an athletic scholarship. A coach must still approve the roster spot, and space can change every year.</p></article><article><b>Recruit</b><p>An athlete a coach actively wants on the team. Recruiting interest does not always mean athletic scholarship money.</p></article></div></section>
+
+    <section className="recruit-note"><span>About the running times</span><p>Each profile shows estimated <b>1600m / 3200m</b> track times. These are planning ranges, not official standards or promises. Cross-country courses are different from one another, team needs change, and the coach makes the final decision. Always email the coach with verified race results.</p></section>
+
+    <section className="school-list" id="schools"><div className="list-heading"><p className="kicker">Alphabetical school list</p><h2>Explore all 12 programs.</h2><p>Every card includes the same topics so the schools are easier to understand and compare.</p></div>
+      {schools.map((s,index)=><article className="school-post" key={s.id}>
+        <header className="post-header"><div className="avatar">{s.short.slice(0,3)}</div><div><p className="post-number">School {String(index+1).padStart(2,"0")} of {schools.length}</p><h3>{s.name}</h3><p className="post-meta">📍 {s.location} · {s.division} · {s.conference}</p></div></header>
+        <p className="takeaway">{s.notes}</p>
+        <div className="tag-row"><span>✈ Professional flight</span><span>🏃 Men's cross country</span><span>🎓 {s.ratp.startsWith("Yes") ? "R-ATP eligible" : "Confirm R-ATP"}</span></div>
+        <div className="info-grid"><section><h4>Flight program</h4><p>{s.aviation}</p></section><section><h4>R-ATP path</h4><p>{s.ratp}</p></section><section><h4>Aircraft and training</h4><p>{s.fleet}</p></section><section><h4>Airline connections</h4><p>{s.partners}</p></section><section><h4>Campus and weather</h4><p>{s.setting}. {s.climate}</p></section><section><h4>Cost to investigate</h4><p>{s.cost} {s.flightCost}</p></section></div>
+        <section className="running-box"><div><h4>Men's cross country</h4><p>{s.xc}</p></div><div className="times"><span><small>Scholarship-level estimate</small><b>{s.times.scholarship}</b></span><span><small>Recruit estimate</small><b>{s.times.recruit}</b></span><span><small>Walk-on conversation</small><b>{s.times.walkon}</b></span></div><p className="time-help">Times are shown as 1600m / 3200m. “Scholarship-level” means fast enough to potentially discuss athletic aid; it does not guarantee money.</p></section>
+        <div className="pros-cons"><section><h4>👍 Reasons to consider it</h4><ul>{s.pros.map(x=><li key={x}>{x}</li>)}</ul></section><section><h4>⚠ Things to think about</h4><ul>{s.cons.map(x=><li key={x}>{x}</li>)}</ul></section></div>
+        <footer className="post-footer"><span>Official links</span>{s.sources.map(x=><a key={x.url} href={x.url} target="_blank" rel="noreferrer">{x.label} ↗</a>)}</footer>
+      </article>)}
     </section>
 
-    {compare.length > 0 && <section className="compare-bar"><div><b>Shortlist {compare.length}/3</b><span>{compare.map(s=>s.short).join(" · ")}</span></div><a href="#compare">Compare now ↓</a></section>}
+    <section className="next-steps"><div><p className="kicker">What to do next</p><h2>Turn the list into a real plan.</h2></div><ol><li><b>Pick five schools.</b><span>Choose a mix of exciting reaches and realistic options.</span></li><li><b>Email each coach.</b><span>Include your verified times, GPA, graduation year, training background, and a link to results.</span></li><li><b>Call each flight program.</b><span>Ask about waitlists, total flight costs, aircraft availability, R-ATP rules, and the FAA medical certificate.</span></li><li><b>Visit your finalists.</b><span>Meet the coach, tour the airport, and ask a current student-athlete how the schedules work together.</span></li></ol></section>
 
-    <section className="section" id="directory">
-      <div className="section-head"><div><p className="eyebrow dark">A–Z directory</p><h2>Find the right runway.</h2></div><p>Open any profile for the details, evidence links and questions to investigate.</p></div>
-      <div className="filters">
-        <input type="search" placeholder="Search school, city or program…" value={query} onChange={e=>setQuery(e.target.value)} aria-label="Search schools"/>
-        <select value={division} onChange={e=>setDivision(e.target.value)} aria-label="Filter by division"><option>All</option><option>NCAA Division I</option><option>NCAA Division II</option><option>NAIA</option></select>
-        <label className="check"><input type="checkbox" checked={ratpOnly} onChange={e=>setRatpOnly(e.target.checked)}/> R-ATP only</label>
-        <select value={sort} onChange={e=>setSort(e.target.value)} aria-label="Sort schools"><option value="alpha">A–Z</option><option value="score">My score</option></select>
-      </div>
-      <p className="result-count">Showing {filtered.length} of {schools.length} schools</p>
-      <div className="cards">{filtered.map(s=><article className="school-card" key={s.id}>
-        <div className="card-top"><div className="monogram">{s.short}</div><div className="card-title"><small>{s.location}</small><h3>{s.name}</h3><p>{s.division} · {s.conference}</p></div><div className="score-pill">{s.score.toFixed(1)}<small>my score</small></div></div>
-        <div className="quick"><span>R-ATP <b>{s.ratp.startsWith("Yes") ? "Yes" : "Check"}</b></span><span>Recruit est. <b>{s.times.recruit}</b></span><span>Setting <b>{s.setting.split(";")[0]}</b></span></div>
-        <p className="summary">{s.notes}</p>
-        <details><summary>View full profile <span>+</span></summary><div className="details-body">
-          <div className="profile-grid"><div><h4>Flight program</h4><p>{s.aviation}</p></div><div><h4>R-ATP</h4><p>{s.ratp}</p></div><div><h4>Fleet & training model</h4><p>{s.fleet}</p></div><div><h4>Airline pathways</h4><p>{s.partners}</p></div><div><h4>Climate</h4><p>{s.climate}</p></div><div><h4>Campus setting</h4><p>{s.setting}</p></div><div><h4>Academic cost</h4><p>{s.cost}</p></div><div><h4>Flight cost</h4><p>{s.flightCost}</p></div></div>
-          <div className="running"><div><p className="eyebrow dark">Estimated men's distance benchmarks</p><h4>{s.xc}</h4></div><div className="time"><small>Scholarship-caliber</small><b>{s.times.scholarship}</b></div><div className="time"><small>Recruit</small><b>{s.times.recruit}</b></div><div className="time"><small>Walk-on conversation</small><b>{s.times.walkon}</b></div></div>
-          <div className="proscons"><div><h4>Reasons to pursue</h4><ul>{s.pros.map(x=><li key={x}>{x}</li>)}</ul></div><div><h4>Watch-outs</h4><ul>{s.cons.map(x=><li key={x}>{x}</li>)}</ul></div></div>
-          <div className="sources"><b>Verify & go deeper</b>{s.sources.map(x=><a key={x.url} href={x.url} target="_blank" rel="noreferrer">{x.label} ↗</a>)}</div>
-        </div></details>
-        <button className={`compare-button ${selected.includes(s.id)?"active":""}`} onClick={()=>toggle(s.id)} disabled={!selected.includes(s.id)&&selected.length>=3}>{selected.includes(s.id)?"✓ Added to shortlist":"+ Add to shortlist"}</button>
-      </article>)}</div>
-    </section>
-
-    {compare.length > 0 && <section className="section compare" id="compare"><div className="section-head"><div><p className="eyebrow dark">Shortlist</p><h2>Side-by-side.</h2></div><button className="text-button" onClick={()=>setSelected([])}>Clear all</button></div><div className="compare-table"><div className="compare-row header"><span>School</span>{compare.map(s=><b key={s.id}>{s.short}</b>)}</div>{[
-      ["My score", ...compare.map(s=>s.score.toFixed(1))], ["Athletics", ...compare.map(s=>s.division)], ["Recruit estimate", ...compare.map(s=>s.times.recruit)], ["R-ATP", ...compare.map(s=>s.ratp.split("—")[0])], ["Aviation", ...compare.map(s=>`${s.scores.aviation}/10`)], ["Value", ...compare.map(s=>`${s.scores.value}/10`)], ["Climate", ...compare.map(s=>`${s.scores.climate}/10`)]
-    ].map((row,i)=><div className="compare-row" key={i}>{row.map((v,j)=>j===0?<span key={j}>{v}</span>:<b key={j}>{v}</b>)}</div>)}</div></section>}
-
-    <section className="method" id="method"><div><p className="eyebrow">How to use this guide</p><h2>Research narrows the field.<br/>Conversations make the decision.</h2></div><div className="steps"><div><b>01</b><h3>Check the two admissions</h3><p>University admission does not always secure a seat in Professional Flight. Ask about direct entry, waitlists and medical requirements.</p></div><div><b>02</b><h3>Email the coach</h3><p>Send verified 1600m, 3200m and 5K results, GPA, graduation year and a short race video. Ask for current roster standards.</p></div><div><b>03</b><h3>Price the whole path</h3><p>Compare net academic cost plus realistic flight completion, checkrides, equipment, summer housing and possible repeats.</p></div><div><b>04</b><h3>Test the schedule</h3><p>Ask a current athlete-pilot how flight blocks, morning practice, travel meets and weather cancellations actually coexist.</p></div></div></section>
-
-    <section className="source-note"><h2>Evidence standard</h2><p>Profiles were refreshed in August 2026 using university aviation, athletics, FAA authorization and published cost pages. Airline agreements, fleets, fees and rosters can change without notice. Always confirm directly before applying or depositing.</p><p><b>Benchmark method:</b> planning ranges were estimated from division/conference strength, current roster context and public collegiate standards. They are deliberately labeled non-official and are not promises of admission, roster placement or aid.</p><a href="https://www.ncaa.org/eligibility-center/recruiting" target="_blank" rel="noreferrer">NCAA recruiting guidance ↗</a></section>
-    <footer><a className="brand" href="#top"><span>RUNWAY</span> / ROUTES</a><p>Independent planning guide · Updated August 2026</p><a href="#top">Back to top ↑</a></footer>
+    <section className="source-note"><h2>Use this as a starting point.</h2><p>The information was refreshed in August 2026 from university aviation, athletics, FAA authorization, and published cost pages. Fleets, fees, airline agreements, and team rosters can change. Confirm the details directly before applying or paying a deposit.</p><a href="https://www.ncaa.org/eligibility-center/recruiting" target="_blank" rel="noreferrer">Read NCAA recruiting guidance ↗</a></section>
+    <footer className="site-footer"><a className="brand" href="#top"><span className="brand-mark">R</span><span>Runway Routes</span></a><p>Independent college planning guide · Updated August 2026</p><a href="#top">Back to top ↑</a></footer>
   </main>
 }
