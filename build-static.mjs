@@ -41,4 +41,5 @@ const html = `<!doctype html>
 
 await writeFile(resolve(output, "index.html"), html);
 await copyFile(resolve(root, "public/favicon.svg"), resolve(output, "favicon.svg"));
+await copyFile(resolve(root, "public/geist-98bbbccb.woff2"), resolve(output, "geist-98bbbccb.woff2"));
 await rm(bundledPage);
