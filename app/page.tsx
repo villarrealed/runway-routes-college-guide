@@ -1,6 +1,7 @@
 type School = {
   id: string; name: string; short: string; location: string; state: string;
   division: string; conference: string; setting: string; climate: string;
+  size: string; flightLocation: string;
   aviation: string; ratp: string; fleet: string; partners: string;
   cost: string; flightCost: string; xc: string;
   times: { scholarship: string; recruit: string; walkon: string };
@@ -13,6 +14,8 @@ const schools: School[] = [
   {
     id: "auburn", name: "Auburn University", short: "AU", location: "Auburn, Alabama", state: "AL",
     division: "NCAA Division I", conference: "SEC", setting: "Large college town; traditional flagship campus",
+    size: "About 35,200 students (Fall 2025). This is a large university with major-school facilities and crowds.",
+    flightLocation: "Auburn's aviation program is part of the main university. Flight training uses the university-owned Auburn University Regional Airport, a short drive from the central campus—not a separate satellite college.",
     climate: "Hot, humid summers; mild winters; thunderstorms can interrupt summer flying.",
     aviation: "B.S. Professional Flight, Part 141 and AABI-accredited. Integrated private through commercial multi-engine, with CFI electives and turbine/crew preparation.",
     ratp: "Yes — 1,000-hour pathway with qualifying degree/coursework", fleet: "University-operated glass-cockpit training fleet; confirm current mix during tour.",
@@ -29,6 +32,8 @@ const schools: School[] = [
   {
     id: "erau-daytona", name: "Embry-Riddle Aeronautical University — Daytona Beach", short: "ERAU-D", location: "Daytona Beach, Florida", state: "FL",
     division: "NCAA Division II", conference: "Sunshine State Conference", setting: "Small aviation-centered campus near the coast and an international airport",
+    size: "About 8,750 students at the Daytona Beach residential campus (Fall 2025, undergraduate and graduate).",
+    flightLocation: "Flight operations are at Daytona Beach International Airport, directly beside the main Daytona Beach campus. Students do not commute to a separate satellite campus.",
     climate: "Warm year-round; hot, humid and stormy summers; hurricane-season planning matters.",
     aviation: "B.S. Aeronautical Science with deeply integrated, university-run flight training and extensive simulators. Aviation is central to campus life.",
     ratp: "Yes — 1,000-hour pathway with qualifying coursework", fleet: "Large university fleet and simulators based at Daytona Beach International Airport.",
@@ -45,6 +50,8 @@ const schools: School[] = [
   {
     id: "erau-prescott", name: "Embry-Riddle Aeronautical University — Prescott", short: "ERAU-P", location: "Prescott, Arizona", state: "AZ",
     division: "NAIA", conference: "California Pacific Conference", setting: "Small aviation-centered campus in a high-desert mountain town",
+    size: "About 3,270 students at the Prescott residential campus (Fall 2025, undergraduate and graduate).",
+    flightLocation: "Academic classes are on the main Prescott campus. Flight training is at Prescott Regional Airport, reached by a short drive; it is an off-campus flight facility, not another university campus.",
     climate: "Four seasons, low humidity and many sunny days; altitude near 5,000 feet shapes running and flight performance.",
     aviation: "B.S. Aeronautical Science with integrated flight courses, simulators and high-density-altitude experience.",
     ratp: "Yes — 1,000-hour pathway with qualifying coursework", fleet: "University-operated aircraft and simulators at Prescott Regional Airport.",
@@ -61,6 +68,8 @@ const schools: School[] = [
   {
     id: "florida-tech", name: "Florida Institute of Technology", short: "Florida Tech", location: "Melbourne, Florida", state: "FL",
     division: "NCAA Division II", conference: "Sunshine State Conference", setting: "Private STEM-focused campus on Florida's Space Coast",
+    size: "About 3,800 full-time, degree-seeking undergraduates (Fall 2025). It has a smaller, STEM-focused college feel.",
+    flightLocation: "Classes are based at the main Melbourne campus. FIT Aviation operates at Melbourne Orlando International Airport about 2.5 miles away, so flight students make a short off-campus trip.",
     climate: "Warm coastal climate; humid summers, frequent afternoon storms and hurricane exposure.",
     aviation: "Aeronautical Science–Flight degree delivered with FIT Aviation at Melbourne Orlando International Airport under Part 141.",
     ratp: "Yes — qualifying aviation degree/coursework; confirm 1,000 vs. 1,250-hour track", fleet: "All-Piper fleet including Warrior, Archer, Pilot 100i and Seminole, with glass avionics.",
@@ -77,6 +86,8 @@ const schools: School[] = [
   {
     id: "kent-state", name: "Kent State University", short: "Kent State", location: "Kent, Ohio", state: "OH",
     division: "NCAA Division I", conference: "Mid-American Conference", setting: "Large public campus in a classic college town near Cleveland",
+    size: "About 24,930 students at the Kent Campus (Fall 2025); the full Kent State system enrolled about 33,319.",
+    flightLocation: "The degree is based at the main Kent Campus. Flying happens at the university-owned Kent State University Airport in nearby Stow, a short drive away—not at a separate academic satellite campus.",
     climate: "Four seasons; cold, cloudy and snowy winters; productive spring-through-fall flying windows.",
     aviation: "B.S. Professional Pilot in an AABI-accredited, Part 141 university program at Kent State University Airport.",
     ratp: "Yes — qualifying Professional Pilot graduates can pursue reduced-hour R-ATP", fleet: "University training fleet with modern avionics; verify the current aircraft count and types on a tour.",
@@ -93,6 +104,8 @@ const schools: School[] = [
   {
     id: "louisiana-tech", name: "Louisiana Tech University", short: "LA Tech", location: "Ruston, Louisiana", state: "LA",
     division: "NCAA Division I", conference: "Conference USA", setting: "Medium public university in a small Southern college town",
+    size: "About 12,145 students (Fall 2025). It is a mid-sized university in a small college town.",
+    flightLocation: "Academic classes are on Louisiana Tech's main Ruston campus. Flight operations are headquartered at Ruston Regional Airport, an off-campus facility a short drive east of town.",
     climate: "Long, hot and humid summers; mild winters; thunderstorms can disrupt training and flying.",
     aviation: "AABI-accredited B.S. Professional Aviation with year-round Part 141 ground, simulator and flight training at Ruston Regional Airport.",
     ratp: "Yes — verify current FAA-approved credit/hour pathway with program", fleet: "Published fleet includes Cessna Skyhawks and Piper Arrows; confirm current additions and multi-engine inventory.",
@@ -109,6 +122,8 @@ const schools: School[] = [
   {
     id: "mtsu", name: "Middle Tennessee State University", short: "MTSU", location: "Murfreesboro, Tennessee", state: "TN",
     division: "NCAA Division I", conference: "Conference USA", setting: "Large public campus in a fast-growing city near Nashville",
+    size: "About 20,500 students (2024–25). It offers a large-campus experience without being as huge as Purdue or Auburn.",
+    flightLocation: "Aerospace classes are part of MTSU's main Murfreesboro campus. Aircraft and flight labs operate at Murfreesboro Municipal Airport, a short drive north of campus.",
     climate: "Four-season but generally mild; hot humid summers, occasional winter ice, thunderstorms.",
     aviation: "B.S. Aerospace, Professional Pilot concentration; AABI-accredited Part 141 training with glass cockpits and CRJ-700 training device.",
     ratp: "Yes — up to 500-hour reduction; qualifying graduates may reach R-ATP at 1,000 hours", fleet: "University aircraft at Murfreesboro Municipal Airport plus advanced flight-training devices.",
@@ -125,6 +140,8 @@ const schools: School[] = [
   {
     id: "mankato", name: "Minnesota State University, Mankato", short: "Minn. State", location: "Mankato, Minnesota", state: "MN",
     division: "NCAA Division II", conference: "Northern Sun Intercollegiate Conference", setting: "Medium public university in a regional city",
+    size: "About 15,720 students (Fall 2025). It is a mid-sized regional public university.",
+    flightLocation: "Aviation academics are connected to the main Mankato campus. Hands-on flight training is provided with North Star Aviation at Mankato Regional Airport, an off-campus airport a short drive away.",
     climate: "Warm summers and cold, snowy winters; winter operations build weather judgment but can reduce flight cadence.",
     aviation: "B.S. Aviation with professional flight labs delivered with North Star Aviation at Mankato Regional Airport; AABI-accredited curriculum.",
     ratp: "Yes — curriculum supports the 60-credit, 1,000-hour R-ATP route", fleet: "Partner-operated training fleet at the regional airport; verify aircraft availability and dispatch metrics.",
@@ -141,6 +158,8 @@ const schools: School[] = [
   {
     id: "purdue", name: "Purdue University", short: "Purdue", location: "West Lafayette, Indiana", state: "IN",
     division: "NCAA Division I", conference: "Big Ten Conference", setting: "Large research university in a major college town with its own airport",
+    size: "About 58,000 students across Purdue's West Lafayette and Indianapolis locations (Fall 2024); Professional Flight is based in West Lafayette.",
+    flightLocation: "This is a true main-campus flight setup. Purdue University Airport sits on the West Lafayette campus, so flight students do not travel to a satellite aviation campus.",
     climate: "Four seasons; humid summers, cold winters, wind and convective weather.",
     aviation: "B.S. Professional Flight through Purdue Polytechnic, with university-airport facilities and airline-oriented coursework.",
     ratp: "Yes — 1,000-hour R-ATP with 60 approved aviation credits", fleet: "University training aircraft and advanced simulators at Purdue University Airport; verify current fleet inventory.",
@@ -157,6 +176,8 @@ const schools: School[] = [
   {
     id: "siu", name: "Southern Illinois University Carbondale", short: "SIU", location: "Carbondale, Illinois", state: "IL",
     division: "NCAA Division I", conference: "Missouri Valley Conference", setting: "Public research university in a small town surrounded by forests and trails",
+    size: "About 11,785 students (Fall 2025). It is a mid-sized university with a smaller-town atmosphere.",
+    flightLocation: "Aviation is part of the main Carbondale university. Flight instruction takes place at Southern Illinois Airport, a nearby off-campus airport reached by a short drive.",
     climate: "Hot humid summers, cool winters and four seasons; occasional storms and winter disruptions.",
     aviation: "B.S. Aviation Flight with Part 141 university training and a broad School of Aviation ecosystem.",
     ratp: "Yes — qualifying graduates may receive a 250- or 500-hour reduction", fleet: "University flight-training aircraft and simulators at Southern Illinois Airport; confirm live dispatch data.",
@@ -173,6 +194,8 @@ const schools: School[] = [
   {
     id: "und", name: "University of North Dakota", short: "UND", location: "Grand Forks, North Dakota", state: "ND",
     division: "NCAA Division I", conference: "Summit League", setting: "Large public university in a small, aviation-centered northern city",
+    size: "About 15,844 students (Fall 2025). The university is mid-sized, while its flight operation is unusually large.",
+    flightLocation: "Aviation classes belong to UND's main Grand Forks campus. Most flight operations are at Grand Forks International Airport about 5 miles west, with regular transportation needed between campus and the airport.",
     climate: "Very cold, windy winters and warm summers; demanding weather builds operational experience but can affect dispatch.",
     aviation: "B.S. Aeronautics in Commercial Aviation at the John D. Odegard School; one of the country's largest collegiate flight operations.",
     ratp: "Yes — 1,000-hour route when all qualifying flight training and coursework are completed at UND", fleet: "Large standardized fleet; a 145-aircraft Piper replacement order begins deliveries in 2027.",
@@ -189,6 +212,8 @@ const schools: School[] = [
   {
     id: "western-michigan", name: "Western Michigan University", short: "WMU", location: "Kalamazoo / Battle Creek, Michigan", state: "MI",
     division: "NCAA Division I", conference: "Mid-American Conference", setting: "Large public university; flight campus is about 25 miles from main campus",
+    size: "About 17,331 students (Fall 2025). It is a mid-sized public university.",
+    flightLocation: "This is the clearest satellite-campus setup in the guide. Most students live and take general classes at the main Kalamazoo campus, while the College of Aviation and flight line are at W.K. Kellogg Airport in Battle Creek, about 25 miles away.",
     climate: "Four seasons with cloudy, snowy winters and pleasant summers; broad weather exposure.",
     aviation: "B.S. Aviation Flight Science with Part 141 training at W.K. Kellogg Airport in Battle Creek.",
     ratp: "Yes — qualifying degree/coursework supports reduced-hour R-ATP", fleet: "32 Cirrus SR20 Gen 7, 9 Piper Seminoles, plus specialty aircraft and modern training devices (published inventory).",
@@ -210,7 +235,7 @@ export default function Home() {
 
     <section className="intro"><div className="intro-copy"><p className="kicker">For runners who want to fly</p><h1>College cross country.<br/>Professional flight training.<br/><span>One school.</span></h1><p>This guide introduces 12 colleges where a male student can study to become a professional pilot and compete in cross country. Read through the schools, talk with your family, and contact the flight program and coach before making a decision.</p><a className="primary-link" href="#schools">See the schools ↓</a></div><aside className="intro-card"><div className="plane-icon">✈</div><strong>What to compare</strong><ul><li>Can I realistically make the running team?</li><li>Can my family afford tuition and flight fees?</li><li>Will I enjoy the campus and weather?</li><li>Can flight lessons fit around practice and meets?</li></ul></aside></section>
 
-    <section className="definitions"><div><span>Quick definitions</span><h2>Know the basics before you start.</h2></div><div className="definition-grid"><article><b>R-ATP</b><p>A Restricted Airline Transport Pilot certificate. An approved college program may let a graduate qualify for an airline first-officer job with fewer than the usual 1,500 flight hours—often 1,000 or 1,250.</p></article><article><b>Part 141</b><p>An FAA-approved flight-school structure with an organized curriculum and regular progress checks. It can make training more efficient, but each student still has to meet FAA standards.</p></article><article><b>Walk-on</b><p>A student who joins a college team without an athletic scholarship. A coach must still approve the roster spot, and space can change every year.</p></article><article><b>Recruit</b><p>An athlete a coach actively wants on the team. Recruiting interest does not always mean athletic scholarship money.</p></article></div></section>
+    <section className="definitions"><div><span>Quick definitions</span><h2>Know the basics before you start.</h2></div><div className="definition-grid"><article><b>R-ATP</b><p>A Restricted Airline Transport Pilot certificate. An approved college program may let a graduate qualify for an airline first-officer job with fewer than the usual 1,500 flight hours—often 1,000 or 1,250.</p></article><article><b>Part 141</b><p>An FAA-approved flight-school structure with an organized curriculum and regular progress checks. It can make training more efficient, but each student still has to meet FAA standards.</p></article><article><b>Walk-on</b><p>A student who joins a college team without an athletic scholarship. A coach must still approve the roster spot, and space can change every year.</p></article><article><b>Recruit</b><p>An athlete a coach actively wants on the team. Recruiting interest does not always mean athletic scholarship money.</p></article><article><b>Main campus vs. satellite</b><p>A main-campus airport is on or beside the primary college. A nearby airport requires a short trip but is still part of the same program. A satellite aviation campus can require a longer daily commute, so transportation and practice timing matter.</p></article></div></section>
 
     <section className="recruit-note"><span>About the running times</span><p>Each profile shows estimated <b>1600m / 3200m</b> track times. These are planning ranges, not official standards or promises. Cross-country courses are different from one another, team needs change, and the coach makes the final decision. Always email the coach with verified race results.</p></section>
 
@@ -219,7 +244,7 @@ export default function Home() {
         <header className="post-header"><div className="avatar">{s.short.slice(0,3)}</div><div><p className="post-number">School {String(index+1).padStart(2,"0")} of {schools.length}</p><h3>{s.name}</h3><p className="post-meta">📍 {s.location} · {s.division} · {s.conference}</p></div></header>
         <p className="takeaway">{s.notes}</p>
         <div className="tag-row"><span>✈ Professional flight</span><span>🏃 Men's cross country</span><span>🎓 {s.ratp.startsWith("Yes") ? "R-ATP eligible" : "Confirm R-ATP"}</span></div>
-        <div className="info-grid"><section><h4>Flight program</h4><p>{s.aviation}</p></section><section><h4>R-ATP path</h4><p>{s.ratp}</p></section><section><h4>Aircraft and training</h4><p>{s.fleet}</p></section><section><h4>Airline connections</h4><p>{s.partners}</p></section><section><h4>Campus and weather</h4><p>{s.setting}. {s.climate}</p></section><section><h4>Cost to investigate</h4><p>{s.cost} {s.flightCost}</p></section></div>
+        <div className="info-grid"><section><h4>Flight program</h4><p>{s.aviation}</p></section><section><h4>R-ATP path</h4><p>{s.ratp}</p></section><section><h4>School size</h4><p>{s.size}</p></section><section><h4>Where flight training happens</h4><p>{s.flightLocation}</p></section><section><h4>Aircraft and training</h4><p>{s.fleet}</p></section><section><h4>Airline connections</h4><p>{s.partners}</p></section><section><h4>Campus and weather</h4><p>{s.setting}. {s.climate}</p></section><section><h4>Cost to investigate</h4><p>{s.cost} {s.flightCost}</p></section></div>
         <section className="running-box"><div><h4>Men's cross country</h4><p>{s.xc}</p></div><div className="times"><span><small>Scholarship-level estimate</small><b>{s.times.scholarship}</b></span><span><small>Recruit estimate</small><b>{s.times.recruit}</b></span><span><small>Walk-on conversation</small><b>{s.times.walkon}</b></span></div><p className="time-help">Times are shown as 1600m / 3200m. “Scholarship-level” means fast enough to potentially discuss athletic aid; it does not guarantee money.</p></section>
         <div className="pros-cons"><section><h4>👍 Reasons to consider it</h4><ul>{s.pros.map(x=><li key={x}>{x}</li>)}</ul></section><section><h4>⚠ Things to think about</h4><ul>{s.cons.map(x=><li key={x}>{x}</li>)}</ul></section></div>
         <footer className="post-footer"><span>Official links</span>{s.sources.map(x=><a key={x.url} href={x.url} target="_blank" rel="noreferrer">{x.label} ↗</a>)}</footer>
